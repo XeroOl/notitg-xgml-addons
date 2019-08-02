@@ -19,7 +19,7 @@
 		--similar to wiggle, but used for chart2lua
 		
 	--function wiggle0(beat, length, step, ease_func, percent, mod, pn)
-		--alternates a mod's value between 'percent' and 0 before resetting
+		--alternates a mod's value between 'percent' and 0. Resets either to 'percent' or 0.
 		
 	--function wiggle2lua0(notedata, ease_func, percent, mod, pn)
 		--similar to wiggle0, but used for chart2lua
