@@ -1,0 +1,35 @@
+<!--
+	An addon for putting the players into proxies.
+	Just paste the commented code here into `mods.xml`, and enable this addon.
+-->
+
+<!--
+	<Actor Type = "ActorProxy" NameCommand = "%xero.name.player1" />
+	<Actor Type = "ActorProxy" NameCommand = "%xero.name.player2" />
+	<Actor Type = "ActorProxy" NameCommand = "%xero.name.player1judgment" />
+	<Actor Type = "ActorProxy" NameCommand = "%xero.name.player2judgment" />
+	<Actor Type = "ActorProxy" NameCommand = "%xero.name.player1combo" />
+	<Actor Type = "ActorProxy" NameCommand = "%xero.name.player2combo" />
+-->
+
+<Layer Type = "Quad" ModCommand = "%xero(function(self)
+	if not actors['player1'] then
+		SCREENMAN:SystemMessage('player_proxies.xml: Can\'t find Player Proxies. Read addons/player_proxies.xml for more details.')
+	else
+		for pn = 1, 2 do
+			if plr[pn] then
+				local p, pc, pj = plr[pn], plr[pn]:GetChild('Combo'), plr[pn]:GetChild('Judgment')
+				actors['player' .. pn]:SetTarget(p)
+				actors['player' .. pn .. 'combo']:SetTarget(pc)
+				actors['player' .. pn .. 'judgment']:SetTarget(pj)
+				p:hidden(1)
+				pc:hidden(1)
+				pj:hidden(1)
+				pc:xy(scx * (pn - .5), scy)
+				pj:xy(scx * (pn - .5), scy)
+				pc:sleep(9e9)
+				pj:sleep(9e9)
+			end
+		end
+	end
+end)" />
