@@ -42,6 +42,9 @@
 	--function sugarkiller(beat, length, step, minstealth, maxstealth, pn)
 		--portable version of the effect from sugarkill X
 		
+	--function sugarkiller_ayakashi(beat, length, step, minstealth, maxstealth, scale, pn)
+		--portable version of the effect from sugarkill X, now made to scale the ayakashi mod
+		
 	---------------------------------------------------------
 	--------END DOCUMENTATION--------------------------------
 	---------------------------------------------------------
@@ -198,6 +201,27 @@
 			else
 				ease_to
 				{beat+(i*0.5)+.75/step, .25/step, instant, 0, 'flip', 0, 'invert', minstealth, 'stealth', pn = pn, mode = 'len'}
+			end
+		end
+	end
+	
+	function sugarkiller_ayakashi(beat, length, step, minstealth, maxstealth, scale, pn)
+		if not minstealth then minstealth = 50 end;
+		if not maxstealth then maxstealth = 85 end;
+		if not scale then scale = -50 end;
+		if not step then step = 1 end;
+		if not length then length = 1 end;
+		for i = 0, math.max(length-1,0) do
+			ease_to
+			{beat+(i*0.5), .25/step, instant, 100+scale*5, 'invert', 0, 'flip', maxstealth, 'stealth', pn = pn, mode = 'len'}
+			{beat+(i*0.5)+.25/step, .25/step, instant, 100-scale, 'flip', 0, 'invert', maxstealth, 'stealth', pn = pn, mode = 'len'}
+			{beat+(i*0.5)+.50/step, .25/step, instant, 100-scale, 'flip', -100+scale*2, 'invert', maxstealth, 'stealth', pn = pn, mode = 'len'}
+			if i == math.max(length-1,0) then
+				ease_to
+				{beat+(i*0.5)+.75/step, .25/step, instant, scale, 'flip', 0, 'invert', 0, 'stealth', pn = pn, mode = 'len'}
+			else
+				ease_to
+				{beat+(i*0.5)+.75/step, .25/step, instant, scale, 'flip', 0, 'invert', minstealth, 'stealth', pn = pn, mode = 'len'}
 			end
 		end
 	end
